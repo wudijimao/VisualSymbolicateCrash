@@ -10,9 +10,13 @@
 		3EB339E31B1D73AF00408187 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB339E21B1D73AF00408187 /* AppDelegate.m */; };
 		3EB339E51B1D73AF00408187 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB339E41B1D73AF00408187 /* main.m */; };
 		3EB339E81B1D73AF00408187 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB339E71B1D73AF00408187 /* ViewController.m */; };
-		3EB339EA1B1D73AF00408187 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EB339E91B1D73AF00408187 /* Images.xcassets */; };
 		3EB339ED1B1D73AF00408187 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EB339EB1B1D73AF00408187 /* Main.storyboard */; };
 		3EB339F91B1D73AF00408187 /* VisualSymbolicateCrashTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB339F81B1D73AF00408187 /* VisualSymbolicateCrashTests.m */; };
+		3EB33A031B1D754300408187 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EB33A021B1D754300408187 /* icon.png */; };
+		3EB33A051B1D770500408187 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EB33A041B1D770500408187 /* Images-2.xcassets */; };
+		3EB33A081B1D87D100408187 /* MyDragingFileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB33A071B1D87D100408187 /* MyDragingFileView.m */; };
+		3EB33A0B1B1D9F6B00408187 /* SymbolicateCrashHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EB33A0A1B1D9F6B00408187 /* SymbolicateCrashHelper.m */; };
+		3EF0AE541B37128F000CEE23 /* DTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EF0AE531B37128F000CEE23 /* DTLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,11 +37,18 @@
 		3EB339E41B1D73AF00408187 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3EB339E61B1D73AF00408187 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3EB339E71B1D73AF00408187 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		3EB339E91B1D73AF00408187 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3EB339EC1B1D73AF00408187 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EB339F21B1D73AF00408187 /* VisualSymbolicateCrashTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VisualSymbolicateCrashTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EB339F71B1D73AF00408187 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EB339F81B1D73AF00408187 /* VisualSymbolicateCrashTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VisualSymbolicateCrashTests.m; sourceTree = "<group>"; };
+		3EB33A021B1D754300408187 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		3EB33A041B1D770500408187 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
+		3EB33A061B1D87D100408187 /* MyDragingFileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyDragingFileView.h; path = ../MyDragingFileView.h; sourceTree = "<group>"; };
+		3EB33A071B1D87D100408187 /* MyDragingFileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyDragingFileView.m; path = ../MyDragingFileView.m; sourceTree = "<group>"; };
+		3EB33A091B1D9F6B00408187 /* SymbolicateCrashHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SymbolicateCrashHelper.h; sourceTree = "<group>"; };
+		3EB33A0A1B1D9F6B00408187 /* SymbolicateCrashHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SymbolicateCrashHelper.m; sourceTree = "<group>"; };
+		3EF0AE521B37128F000CEE23 /* DTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLog.h; sourceTree = "<group>"; };
+		3EF0AE531B37128F000CEE23 /* DTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +90,20 @@
 		3EB339DE1B1D73AF00408187 /* VisualSymbolicateCrash */ = {
 			isa = PBXGroup;
 			children = (
+				3EB33A061B1D87D100408187 /* MyDragingFileView.h */,
+				3EB33A071B1D87D100408187 /* MyDragingFileView.m */,
+				3EB33A021B1D754300408187 /* icon.png */,
 				3EB339E11B1D73AF00408187 /* AppDelegate.h */,
 				3EB339E21B1D73AF00408187 /* AppDelegate.m */,
 				3EB339E61B1D73AF00408187 /* ViewController.h */,
 				3EB339E71B1D73AF00408187 /* ViewController.m */,
-				3EB339E91B1D73AF00408187 /* Images.xcassets */,
 				3EB339EB1B1D73AF00408187 /* Main.storyboard */,
+				3EB33A041B1D770500408187 /* Images-2.xcassets */,
 				3EB339DF1B1D73AF00408187 /* Supporting Files */,
+				3EB33A091B1D9F6B00408187 /* SymbolicateCrashHelper.h */,
+				3EB33A0A1B1D9F6B00408187 /* SymbolicateCrashHelper.m */,
+				3EF0AE521B37128F000CEE23 /* DTLog.h */,
+				3EF0AE531B37128F000CEE23 /* DTLog.m */,
 			);
 			path = VisualSymbolicateCrash;
 			sourceTree = "<group>";
@@ -196,8 +214,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EB339EA1B1D73AF00408187 /* Images.xcassets in Resources */,
+				3EB33A051B1D770500408187 /* Images-2.xcassets in Resources */,
 				3EB339ED1B1D73AF00408187 /* Main.storyboard in Resources */,
+				3EB33A031B1D754300408187 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,9 +234,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF0AE541B37128F000CEE23 /* DTLog.m in Sources */,
 				3EB339E81B1D73AF00408187 /* ViewController.m in Sources */,
 				3EB339E51B1D73AF00408187 /* main.m in Sources */,
 				3EB339E31B1D73AF00408187 /* AppDelegate.m in Sources */,
+				3EB33A0B1B1D9F6B00408187 /* SymbolicateCrashHelper.m in Sources */,
+				3EB33A081B1D87D100408187 /* MyDragingFileView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +429,7 @@
 				3EB339FE1B1D73AF00408187 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3EB339FF1B1D73AF00408187 /* Build configuration list for PBXNativeTarget "VisualSymbolicateCrashTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +438,7 @@
 				3EB33A011B1D73AF00408187 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
