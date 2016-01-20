@@ -5,6 +5,36 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3EB339DB1B1D73AF00408187"
+               BuildableName = "VisualSymbolicateCrash.app"
+               BlueprintName = "VisualSymbolicateCrash"
+               ReferencedContainer = "container:VisualSymbolicateCrash.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3EB339F11B1D73AF00408187"
+               BuildableName = "VisualSymbolicateCrashTests.xctest"
+               BlueprintName = "VisualSymbolicateCrashTests"
+               ReferencedContainer = "container:VisualSymbolicateCrash.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -12,7 +42,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3EB339F11B1D73AF00408187"
+               BuildableName = "VisualSymbolicateCrashTests.xctest"
+               BlueprintName = "VisualSymbolicateCrashTests"
+               ReferencedContainer = "container:VisualSymbolicateCrash.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3EB339DB1B1D73AF00408187"
+            BuildableName = "VisualSymbolicateCrash.app"
+            BlueprintName = "VisualSymbolicateCrash"
+            ReferencedContainer = "container:VisualSymbolicateCrash.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -23,6 +72,16 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3EB339DB1B1D73AF00408187"
+            BuildableName = "VisualSymbolicateCrash.app"
+            BlueprintName = "VisualSymbolicateCrash"
+            ReferencedContainer = "container:VisualSymbolicateCrash.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -32,12 +91,22 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "3EB339DB1B1D73AF00408187"
+            BuildableName = "VisualSymbolicateCrash.app"
+            BlueprintName = "VisualSymbolicateCrash"
+            ReferencedContainer = "container:VisualSymbolicateCrash.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

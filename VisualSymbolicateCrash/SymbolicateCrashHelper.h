@@ -11,5 +11,5 @@
 
 @interface SymbolicateCrashHelper : NSObject
 + (void)registCommandLineShortCut:(NSString*)shortCutName;
-+ (void)SaveFile:(MyFileInfo*)file;
++ (BOOL)SaveFile:(MyFileInfo*)file;
 @end

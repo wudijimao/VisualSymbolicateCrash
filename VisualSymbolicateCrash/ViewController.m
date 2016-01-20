@@ -70,7 +70,13 @@ typedef SymbolicateCrashHelper Helper;
         }
     }
     for (MyFileInfo *file in crashFiles) {
-        [Helper SaveFile:file];
+        BOOL ret = [Helper SaveFile:file];
+        if (!ret) {
+            NSAlert *anAlert = [[NSAlert alloc] init];
+            anAlert.messageText = @"crash文件解析失败";
+            anAlert.informativeText = [NSString stringWithFormat:@"文件名:%@.crash", file.name];
+            [anAlert runModal];
+        }
     }
 }
 @end

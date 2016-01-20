@@ -8,6 +8,7 @@
 
 #import "SymbolicateCrashHelper.h"
 @implementation SymbolicateCrashHelper
+
 //创建命令行超链接，使访问地址变短
 + (void)registCommandLineShortCut:(NSString*)shortCutName {
     NSMutableString *cmd = [[NSMutableString alloc] initWithString:@"$ ln -s "];
@@ -18,14 +19,15 @@
 }
 
 //------------------------------------------------------
-+ (void)SaveFile:(MyFileInfo*)file {
++ (BOOL)SaveFile:(MyFileInfo*)file {
     if ([file.ext isEqualToString:@"dSYM"]) {
         [self SaveDSYMFile:file];
     } else if ([file.ext isEqualToString:@"crash"]) {
-        [self SaveCrashFile:file];
+        return [self SaveCrashFile:file];
     } else if ([file.ext isEqualToString:@"ipa"]) {
         [self SaveIPAFile:file];
     }
+    return YES;
 }
 + (void)SaveDSYMFile:(MyFileInfo*)file {
     NSArray* uuids = [self getGUID_DSYM:file];
@@ -34,33 +36,33 @@
         [self copyFile:file ToPath:savePath];
     }
 }
-+ (void)SaveCrashFile:(MyFileInfo*)file {
++ (BOOL)SaveCrashFile:(MyFileInfo*)file {
     NSString *uuid = [self getGUID_Crash:file];
     NSString *savePath = [self getPathWithGUID:uuid];
     [self copyFile:file ToPath:savePath];
     
-    NSFileManager *manager = [NSFileManager defaultManager];
-    for (NSString *fileName in [manager enumeratorAtPath:savePath]) {
-        if ([[fileName pathExtension] isEqualTo:@"dSYM"]) {
-            NSString *cmd = [self getSymbolicateCrashCommandLine];
-            NSMutableArray *args = [[NSMutableArray alloc] init];
-            [args addObject:file.fullPath];
-            NSString *dSYMPath = [NSString stringWithFormat:@"%@/%@", savePath, fileName];
-            [args addObject:dSYMPath];
-            //[args addObject:@">"];
-            NSString *outputPath = [NSString stringWithFormat:@"%@/%@.txt", savePath, file.name];
-            //[args addObject:outputPath];
-            NSString* text = [self runCommandLine:cmd Args:args];
-            __autoreleasing NSError *error = [[NSError alloc] init];
-            [text writeToFile:outputPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
-            
-            cmd = @"/usr/bin/open";
-            [args removeAllObjects];
-            [args addObject:outputPath];
-            [self runCommandLine:cmd Args:args];
-            break;
-        }
+    NSString *dSYMPath = [self getFirstFitExtensionFile:@"dSYM" InPath:savePath];
+    NSString *appPath = [self getFirstFitExtensionFile:@"app" InPath:savePath];
+    if (dSYMPath && appPath) {
+        NSString *cmd = [self getSymbolicateCrashCommandLine];
+        NSMutableArray *args = [[NSMutableArray alloc] init];
+        [args addObject:file.fullPath];
+        [args addObject:dSYMPath];
+        [args addObject:appPath];
+        //[args addObject:@">"];
+        NSString *outputPath = [NSString stringWithFormat:@"%@/%@.txt", savePath, file.name];
+        //[args addObject:outputPath];
+        NSString* text = [self runCommandLine:cmd Args:args];
+        __autoreleasing NSError *error = [[NSError alloc] init];
+        [text writeToFile:outputPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        
+        cmd = @"/usr/bin/open";
+        [args removeAllObjects];
+        [args addObject:outputPath];
+        [self runCommandLine:cmd Args:args];
+        return YES;
     }
+    return NO;
 }
 + (void)SaveIPAFile:(MyFileInfo*)file {
     MyFileInfo*appFile = [[MyFileInfo alloc] initWithFullPath:[self getAppFromIPA:file]];
@@ -79,7 +81,7 @@
     [args addObject:[NSString stringWithFormat:@"%@/PayLoad", [self getCachePath]]];
     [self runCommandLine:cmd1 Args:args];
     
-    NSMutableString *str = [[NSMutableString alloc] initWithString:[self getCachePath]];
+    NSString *str = [[NSMutableString alloc] initWithString:[self getCachePath]];
     //[str appendFormat:@"/%@",file.name];
     [args removeAllObjects];
     [args addObject:@"-q"];
@@ -88,14 +90,19 @@
     [args addObject:str];
     NSString *cmd = @"/usr/bin/unzip";
     NSString *ret = [self runCommandLine:cmd Args:args];
-    [str appendString:@"/Payload/WeiboMovie.app"];
-    return str;
+    
+    str = [str stringByAppendingString:@"/Payload/"];
+    NSArray<NSString *> *paths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:str error:nil];
+    return [str stringByAppendingString:paths.firstObject];
 }
 + (NSArray*)getGUID_DSYM:(MyFileInfo*)file {
     NSString *cmd = @"/usr/bin/dwarfdump";
     NSMutableArray *args = [[NSMutableArray alloc] init];
     [args addObject:@"--uuid"];
-    [args addObject:[NSString stringWithFormat:@"%@/Contents/Resources/DWARF/WeiboMovie", file.fullPath]];
+    NSString *path = [NSString stringWithFormat:@"%@/Contents/Resources/DWARF/", file.fullPath];
+    NSArray<NSString*> *paths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:nil];
+    path = [path stringByAppendingString:paths.firstObject];
+    [args addObject:path];
     NSString *uuid = [self runCommandLine:cmd Args:args];
     return [self getUUIDs:uuid];
 }
@@ -121,19 +128,20 @@
     NSString *cmd = @"/usr/bin/dwarfdump";
     NSMutableArray *args = [[NSMutableArray alloc] init];
     [args addObject:@"--uuid"];
-    [args addObject:[NSString stringWithFormat:@"%@/WeiboMovie", file.fullPath]];
+    [args addObject:[NSString stringWithFormat:@"%@/%@", file.fullPath, file.name]];
     NSString *uuid = [self runCommandLine:cmd Args:args];
     return [self getUUIDs:uuid];
 }
 + (NSArray*)getUUIDs:(NSString*)idsStr {
     NSMutableArray *ids = [[NSMutableArray alloc] init];
     NSMutableString *str = [idsStr mutableCopy];
+    NSUInteger uuidLen = 36;
     while (str.length > 0) {
         NSRange range = [str rangeOfString:@"UUID: "];
         if (range.length > 0) {
-            NSString *uuid = [str substringWithRange:NSMakeRange(range.location + range.length, 36)];
+            NSString *uuid = [str substringWithRange:NSMakeRange(range.location + range.length, uuidLen)];
             [ids addObject:uuid];
-            [str deleteCharactersInRange:NSMakeRange(0, 42)];
+            [str deleteCharactersInRange:NSMakeRange(range.location, uuidLen + range.length)];
         } else {
             break;
         }
@@ -142,6 +150,16 @@
 }
 
 //-------------------------Tool---------------------------------
++ (NSString*)getFirstFitExtensionFile:(NSString*)extension InPath:(NSString*)path {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    for (NSString *fileName in [manager enumeratorAtPath:path]) {
+        if ([[fileName pathExtension] isEqualToString:extension]) {
+            NSString *filePath = [NSString stringWithFormat:@"%@/%@", path, fileName];
+            return filePath;
+        }
+    }
+    return nil;
+}
 + (NSString*)getPathWithGUID:(NSString*)guid {
     NSString *path = [NSString stringWithFormat:@"%@/%@", [self getAppPath], guid];
     return path;
